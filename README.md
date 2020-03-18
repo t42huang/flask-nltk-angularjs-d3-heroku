@@ -56,3 +56,11 @@ git push stage master
 git push prod master
 # - double-check it works at: https://tinas-text-analyzer.herokuapp.com/
 ```
+
+### Workflow: Development > Staging > Production
+
+1. make some changes, e.g. bug fix, or add a new feature.
+2. confirm it works on your local development environment.
+3. commit the change (ask for peer reviews to get it approved).
+4. push the change to staging environment, confirm it works.
+5. push the change to live production environment for customers / end users.
