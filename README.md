@@ -55,6 +55,12 @@ git push stage master
 # deploy the app to production
 git push prod master
 # - double-check it works at: https://tinas-text-analyzer.herokuapp.com/
+
+
+# Set up environment variables
+export APP_SETTINGS="config.DevelopmentConfig"
+heroku config:set APP_SETTINGS=config.StagingConfig --remote stage
+heroku config:set APP_SETTINGS=config.ProductionConfig --remote prod
 ```
 
 ### Workflow: Development > Staging > Production

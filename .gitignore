@@ -1,2 +1,8 @@
 # virtual environment folder
 venv
+
+# python compiled code
+__pycache__/
+
+# environment variables for Dev environment
+.env
