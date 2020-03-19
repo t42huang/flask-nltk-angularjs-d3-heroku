@@ -156,7 +156,18 @@ export DATABASE_URL="postgresql:///text_analyzer_dev"
 python worker.py
 
 # go to http://localhost:5000, submit using an url, for example https://realpython.com
-# grab the job id from the terminal. Then use that id in the ‘/results/’ endpoint - i.e., http://localhost:5000/results/d1053794-1d6c-4421-8902-0467c58a46f1
+
+# add Redis to the staging environment
+heroku addons:create redistogo:nano --app tinas-text-analyzer-stage
+# then you can double-check making sure Redis environment variable is set
+heroku config --app tinas-text-analyzer-stage | grep REDISTOGO_URL
+
+# to check running heroku dynos details, run this
+heroku addons
+
+# run locally
+redis-server
+heroku local
 ```
 
 ## Reference
@@ -177,6 +188,9 @@ python worker.py
 4. [Implement a Redis Task Queue](https://realpython.com/flask-by-example-implementing-a-redis-task-queue/)
     - implement a Redis task queue to handle text processing
 5. [Integrate Flask and AngularJS](https://realpython.com/flask-by-example-integrating-flask-and-angularjs/)
+    - Set up Angular on the front-end to continuously poll the back-end to see if the request is done processing.
+6. [Update Staging Environment](https://realpython.com/updating-the-staging-environment/)
+    - Push to the staging server on Heroku - setting up Redis and detailing how to run two processes (web and worker) on a single Dyno.
 
 ### Learn more
 
@@ -192,3 +206,4 @@ python worker.py
 - [AngularJS](https://angularjs.org/)
   - [Bitcoin Caculator with Data Visualization using AngularJS & D3](https://github.com/mjhea0/thinkful-angular)
   - [AngularJS $timeout](https://code.angularjs.org/1.4.9/docs/api/ng/service/$timeout)
+  - [D3.js - Data Driven Documents](https://d3js.org/)
