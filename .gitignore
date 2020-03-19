@@ -9,3 +9,6 @@ __pycache__/
 
 # Mac specific folder meta file
 .DS_Store
+
+# redis database dump
+dump.rdb

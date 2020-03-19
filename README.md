@@ -137,6 +137,28 @@ python
 
 Note: to reduce the size of the commit and stay focused, we removed support for other languages. We only support English language - Only English tokenier is kept, all others in `plunkt` are deleted, including the `plunkt.zip`
 
+### Redis Task Queue
+
+```bash
+# install redis
+brew install redis
+
+# open a new shell window
+# start the Redis server:
+redis-server
+
+# open a new shell window
+# config environemnt variable for this shell session
+export APP_SETTINGS="config.DevelopmentConfig"
+export DATABASE_URL="postgresql:///text_analyzer_dev"
+
+# run a worker process to listen for queued tasks
+python worker.py
+
+# go to http://localhost:5000, submit using an url, for example https://realpython.com
+# grab the job id from the terminal. Then use that id in the ‘/results/’ endpoint - i.e., http://localhost:5000/results/d1053794-1d6c-4421-8902-0467c58a46f1
+```
+
 ## Reference
 
 1. [Project Setup](https://realpython.com/flask-by-example-part-1-project-setup/)
@@ -151,15 +173,17 @@ Note: to reduce the size of the commit and stay focused, we removed support for 
     - Alembic to handle database migrations.
 3. [Text Processing with Requests, BeautifulSoup, and NLTK (Natural Language Toolkit) libraries](https://realpython.com/flask-by-example-part-3-text-processing-with-requests-beautifulsoup-nltk/)
     - Add in the back-end logic to scrape and then process the word counts from a webpage using the requests, BeautifulSoup, and Natural Language Toolkit (NLTK) libraries
+4. [Implement a Redis Task Queue](https://realpython.com/flask-by-example-implementing-a-redis-task-queue/)
+    - implement a Redis task queue to handle text processing
 
 ### Learn more
 
 - [Heroku Postgres Follower(Slave) Databases](https://devcenter.heroku.com/articles/heroku-postgres-follower-databases)
 - [Natural Language Toolkit (NLTK)](https://www.nltk.org/index.html)
-
   - Book: [Natural Language Processing with Python
 – Analyzing Text with the Natural Language Toolkit](http://www.nltk.org/book/)
   - [Install NLTK Data](https://www.nltk.org/data.html#command-line-installation)
   - [nltk.tokenize](https://www.nltk.org/api/nltk.tokenize.html)
   - [nltk.text](https://www.nltk.org/_modules/nltk/text.html)
 - [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Redis](https://redis.io/)
