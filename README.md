@@ -134,6 +134,8 @@ heroku run python manage.py db upgrade --app tinas-text-analyzer
     - Postgres database to store the results of our word counts
     - SQLAlchemy, an Object Relational Mapper
     - Alembic to handle database migrations.
+3. [Text Processing with Requests, BeautifulSoup, and NLTK (Natural Language Toolkit) libraries](https://realpython.com/flask-by-example-part-3-text-processing-with-requests-beautifulsoup-nltk/)
+    - Add in the back-end logic to scrape and then process the word counts from a webpage using the requests, BeautifulSoup, and Natural Language Toolkit (NLTK) libraries
 
 ### Learn more
 
