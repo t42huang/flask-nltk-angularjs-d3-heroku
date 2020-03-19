@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="TextAnalyzerApp">
   <head>
     <title>Text Analyzer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +12,17 @@
     </style>
   </head>
 
-  <body>
+  <body ng-controller="TextAnalyzerController">
     <div class="container">
       <div class="row">
-
         
         <div class="col-sm-5 col-sm-offset-1">
-          <h1>Wordcount 3000</h1>
+          <h1>Text Analyzer</h1>
           <br>
-          <form role="form" method="POST" action="/">
+          <form role="form" ng-submit="getResults()">
             <div class="form-group">
               <input type="text" name="url" class="form-control" id="url-box" 
-                placeholder="Enter URL..." style="max-width: 300px;">
+                placeholder="Enter URL..." style="max-width: 300px;" ng-model="url" required>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -34,28 +33,33 @@
           <br>
         </div>
 
-
         <div class="col-sm-5 col-sm-offset-1">
-          {% if results %}
-            <h2>Frequencies</h2>
-            <br>
-            <div id="results">
-              <table class="table table-striped" style="max-width: 300px;">
-                <thead>
-                  <tr>
-                    <th>Word</th>
-                    <th>Count</th>
-                  </tr>
-                </thead>
-                {% for result in results%}
-                  <tr>
-                    <td>{{ result[0] }}</td>
-                    <td>{{ result[1] }}</td>
-                  </tr>
-                {% endfor %}
-              </table>
-            </div>
-          {% endif %}
+          <h2>Word Frequencies</h2>
+          <!-- {% raw %}
+          <div id="results">{{ wordcounts }}</div>
+          {% endraw %} -->
+          
+          <div id="results">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% raw %}
+                <tr ng-repeat="element in wordcounts">
+          
+                  <td>{{ element[0] }}</td>
+                  <td>{{ element[1] }}</td>
+          
+                </tr>
+                {% endraw %}
+              </tbody>
+            </table>
+          </div>
+
         </div>
         
       </div>
@@ -64,5 +68,7 @@
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='angular.1.4.9.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
   </body>
 </html>

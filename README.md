@@ -165,6 +165,7 @@ python worker.py
 
     - Set up a local development environment.
     - Deploy both a staging and a production environment on Heroku.
+    - [code reference](https://github.com/realpython/flask-by-example)
 
 2. [Setup PostgreSQL, SQLAlchemy & Alembic](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
   
@@ -175,6 +176,7 @@ python worker.py
     - Add in the back-end logic to scrape and then process the word counts from a webpage using the requests, BeautifulSoup, and Natural Language Toolkit (NLTK) libraries
 4. [Implement a Redis Task Queue](https://realpython.com/flask-by-example-implementing-a-redis-task-queue/)
     - implement a Redis task queue to handle text processing
+5. [Integrate Flask and AngularJS](https://realpython.com/flask-by-example-integrating-flask-and-angularjs/)
 
 ### Learn more
 
@@ -187,3 +189,6 @@ python worker.py
   - [nltk.text](https://www.nltk.org/_modules/nltk/text.html)
 - [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 - [Redis](https://redis.io/)
+- [AngularJS](https://angularjs.org/)
+  - [Bitcoin Caculator with Data Visualization using AngularJS & D3](https://github.com/mjhea0/thinkful-angular)
+  - [AngularJS $timeout](https://code.angularjs.org/1.4.9/docs/api/ng/service/$timeout)

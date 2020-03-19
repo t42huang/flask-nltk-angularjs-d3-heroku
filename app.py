@@ -1,4 +1,5 @@
 import os
+import json
 import operator
 from collections import Counter
 
@@ -72,28 +73,29 @@ def count_and_save_words(url):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def hello():
-    results = {}
-
-    if request.method == "POST":
-        # this import solves a rq bug which currently exists
-        from app import count_and_save_words
-
-        # get the url from the input form
-        url = request.form['url']
-        if not url[:8].startswith(('https://', 'http://')):
-            url = 'http://' + url
-        
-        job = q.enqueue_call(
-            func=count_and_save_words, args=(url,), result_ttl=5000)
-        print(job.get_id())
-
-    return render_template('index.html', results=results)
+def index():
+    return render_template('index.html')
 
 
-@app.route('/<name>')
-def hi_there(name):
-    return "Hi {}!".format(name)
+@app.route('/start', methods=['POST'])
+def get_counts():
+    # this import solves a rq bug which currently exists
+    from app import count_and_save_words
+
+    # get the url from the input form
+    data = json.loads(request.data.decode())
+    url = data["url"]
+    if not url[:8].startswith(('https://', 'http://')):
+        url = 'http://' + url
+    
+    # start job
+    job = q.enqueue_call(
+        func=count_and_save_words, args=(url,), result_ttl=5000
+    )
+    print(job.get_id())
+
+    # return created job id
+    return job.get_id()
 
 
 @app.route("/results/<job_key>", methods=['GET'])
