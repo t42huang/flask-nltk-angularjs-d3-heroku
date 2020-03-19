@@ -122,6 +122,21 @@ heroku run python manage.py db upgrade --app tinas-text-analyzer
 4. push the change to staging environment, confirm it works.
 5. push the change to live production environment for customers / end users.
 
+### NLTK
+
+```bash
+mkdir nltk_data; cd nltk_data; pwd
+# copy the path of this folder
+python
+>>> import nltk
+>>> nltk.download()
+# - on the window opened, change the Downloading Directory to the nltk_data copied above
+# - select Models tab > punkt, then click `download`
+
+```
+
+Note: to reduce the size of the commit and stay focused, we removed support for other languages. We only support English language - Only English tokenier is kept, all others in `plunkt` are deleted, including the `plunkt.zip`
+
 ## Reference
 
 1. [Project Setup](https://realpython.com/flask-by-example-part-1-project-setup/)
@@ -140,3 +155,11 @@ heroku run python manage.py db upgrade --app tinas-text-analyzer
 ### Learn more
 
 - [Heroku Postgres Follower(Slave) Databases](https://devcenter.heroku.com/articles/heroku-postgres-follower-databases)
+- [Natural Language Toolkit (NLTK)](https://www.nltk.org/index.html)
+
+  - Book: [Natural Language Processing with Python
+– Analyzing Text with the Natural Language Toolkit](http://www.nltk.org/book/)
+  - [Install NLTK Data](https://www.nltk.org/data.html#command-line-installation)
+  - [nltk.tokenize](https://www.nltk.org/api/nltk.tokenize.html)
+  - [nltk.text](https://www.nltk.org/_modules/nltk/text.html)
+- [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)

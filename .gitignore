@@ -6,3 +6,6 @@ __pycache__/
 
 # environment variables for Dev environment
 .env
+
+# Mac specific folder meta file
+.DS_Store
