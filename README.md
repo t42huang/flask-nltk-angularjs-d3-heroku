@@ -63,6 +63,57 @@ heroku config:set APP_SETTINGS=config.StagingConfig --remote stage
 heroku config:set APP_SETTINGS=config.ProductionConfig --remote prod
 ```
 
+### Database
+
+- [install Postgres](https://postgresapp.com/documentation/install.html)
+  - for Mac, you might need to add an alias `alias psql='/Applications/Postgres.app/Contents/Versions/latest/bin/psql'`
+- create dev database
+
+```bash
+$ psql
+# create database text_analyzer_dev;
+CREATE DATABASE
+# \q    # \q to exit
+
+export DATABASE_URL="postgresql:///text_analyzer_dev"
+python manage.py db init
+python manage.py db migrate
+python manage.py db upgrade
+
+python manage.py runserver
+
+# add the Heroku Postgres addon for Staging environment
+heroku addons:create heroku-postgresql:hobby-dev --app tinas-text-analyzer-stage
+
+# check environment variables in Staging environment, 
+#   you should see an entry for `DATABASE_URL`
+heroku config --app tinas-text-analyzer-stage
+
+# push the changes to staging
+git push stage master
+# run the migrations on staging
+heroku run python manage.py db upgrade --app tinas-text-analyzer-stage
+
+## check if all is working as expected on https://tinas-text-analyzer-stage.herokuapp.com/
+
+
+## do the same for production
+# add the Heroku Postgres addon for Production environment
+heroku addons:create heroku-postgresql:hobby-dev --app tinas-text-analyzer
+
+# check environment variables in Production environment, 
+#   you should see an entry for `DATABASE_URL`
+heroku config --app tinas-text-analyzer
+
+# push the changes to Production
+git push prod master
+# run the migrations on Production
+heroku run python manage.py db upgrade --app tinas-text-analyzer
+
+## check if all is working as expected on https://tinas-text-analyzer.herokuapp.com/
+
+```
+
 ### Workflow: Development > Staging > Production
 
 1. make some changes, e.g. bug fix, or add a new feature.
@@ -70,3 +121,20 @@ heroku config:set APP_SETTINGS=config.ProductionConfig --remote prod
 3. commit the change (ask for peer reviews to get it approved).
 4. push the change to staging environment, confirm it works.
 5. push the change to live production environment for customers / end users.
+
+## Reference
+
+1. [Project Setup](https://realpython.com/flask-by-example-part-1-project-setup/)
+
+    - Set up a local development environment.
+    - Deploy both a staging and a production environment on Heroku.
+
+2. [Setup PostgreSQL, SQLAlchemy & Alembic](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
+  
+    - Postgres database to store the results of our word counts
+    - SQLAlchemy, an Object Relational Mapper
+    - Alembic to handle database migrations.
+
+### Learn more
+
+- [Heroku Postgres Follower(Slave) Databases](https://devcenter.heroku.com/articles/heroku-postgres-follower-databases)
