@@ -7,6 +7,7 @@
       function($scope, $log, $http, $timeout) {
         $scope.submitButtonText = 'Submit';
         $scope.loading = false;
+        $scope.urlerror = false;
 
         $scope.getResults = function() {
           // $log.log("test");
@@ -41,6 +42,7 @@
                   } else if (status === 200) {
                     $log.log(data); // log the word count result
                     
+                    $scope.urlerror = false;
                     $scope.loading = false;
                     $scope.submitButtonText = "Submit";
                     $scope.wordcounts = data;
@@ -51,6 +53,12 @@
                   // continue to call the poller() function every 2 seconds
                   // until the timeout is cancelled
                   timeout = $timeout(poller, 2000);
+                })
+                .error(function(error) {
+                    $log.log(error);
+                    $scope.loading = false;
+                    $scope.submitButtonText = "Submit";
+                    $scope.urlerror = true;
                 });
             };
             poller();
