@@ -209,6 +209,8 @@ git push prod master # or use: git push --force prod master
 6. [Update Staging Environment](https://realpython.com/updating-the-staging-environment/)
     - Push to the staging server on Heroku - setting up Redis and detailing how to run two processes (web and worker) on a single Dyno.
 7. [Update FrontEnd UI](https://realpython.com/flask-by-example-updating-the-ui/)
+8. [Data Visualization with D3](https://realpython.com/flask-by-example-custom-angular-directive-with-d3/)
+    - Create a custom Angular Directive to display a frequency distribution chart using JavaScript and D3.
 
 ### Learn more
 
