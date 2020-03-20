@@ -157,17 +157,33 @@ python worker.py
 
 # go to http://localhost:5000, submit using an url, for example https://realpython.com
 
+
+# deploy to Staging environment
 # add Redis to the staging environment
 heroku addons:create redistogo:nano --app tinas-text-analyzer-stage
 # then you can double-check making sure Redis environment variable is set
 heroku config --app tinas-text-analyzer-stage | grep REDISTOGO_URL
-
 # to check running heroku dynos details, run this
 heroku addons
 
-# run locally
+# test it locally before pusing to the staging server [Not working yet?]
 redis-server
 heroku local
+
+# push changes to Staging for deployment
+git push stage master # or use: git push --force stage master
+
+
+# deploy to Production environment
+# add Redis to the Production environment
+heroku addons:create redistogo:nano --app tinas-text-analyzer
+# then you can double-check making sure Redis environment variable is set
+heroku config --app tinas-text-analyzer | grep REDISTOGO_URL
+# to check running heroku dynos details, run this
+heroku addons
+# push changes to Production for deployment
+git push prod master # or use: git push --force prod master
+
 ```
 
 ## Reference
