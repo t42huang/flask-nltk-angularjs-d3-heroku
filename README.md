@@ -205,11 +205,15 @@ git push prod master # or use: git push --force prod master
     - implement a Redis task queue to handle text processing
 5. [Integrate Flask and AngularJS](https://realpython.com/flask-by-example-integrating-flask-and-angularjs/)
     - Set up Angular on the front-end to continuously poll the back-end to see if the request is done processing.
+    - wrap some angular related code in {% raw %} and {% endraw %} so that Jinja knows to evaluate this as raw HTML. If we didn’t do this, Flask will try to evaluate the {{ variable }} as a Jinja variable and Angular won’t get a chance to evaluate it.
 6. [Update Staging Environment](https://realpython.com/updating-the-staging-environment/)
     - Push to the staging server on Heroku - setting up Redis and detailing how to run two processes (web and worker) on a single Dyno.
+7. [Update FrontEnd UI](https://realpython.com/flask-by-example-updating-the-ui/)
 
 ### Learn more
 
+- [Heroku](https://devcenter.heroku.com/)
+  - [heroku local](https://devcenter.heroku.com/articles/heroku-local)
 - [Heroku Postgres Follower(Slave) Databases](https://devcenter.heroku.com/articles/heroku-postgres-follower-databases)
 - [Natural Language Toolkit (NLTK)](https://www.nltk.org/index.html)
   - Book: [Natural Language Processing with Python
@@ -219,6 +223,7 @@ git push prod master # or use: git push --force prod master
   - [nltk.text](https://www.nltk.org/_modules/nltk/text.html)
 - [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 - [Redis](https://redis.io/)
+  - [Heroku Redis ToGo](https://devcenter.heroku.com/articles/redistogo)
 - [AngularJS](https://angularjs.org/)
   - [Bitcoin Caculator with Data Visualization using AngularJS & D3](https://github.com/mjhea0/thinkful-angular)
   - [AngularJS $timeout](https://code.angularjs.org/1.4.9/docs/api/ng/service/$timeout)

@@ -5,6 +5,9 @@
   
     .controller('TextAnalyzerController', ['$scope', '$log', '$http', '$timeout',
       function($scope, $log, $http, $timeout) {
+        $scope.submitButtonText = 'Submit';
+        $scope.loading = false;
+
         $scope.getResults = function() {
           // $log.log("test");
 
@@ -16,6 +19,10 @@
             .success(function(jobId) {
                 // $log.log(jobId); // log the job id
                 getWordCountPoller(jobId);
+
+                $scope.wordcounts = null; // clear out old result
+                $scope.loading = true; // disable submit button
+                $scope.submitButtonText = "Loading"; // change submit button text
             })
             .error(function(error) {
                 $log.log(error);
@@ -31,9 +38,13 @@
                 .success(function(data, status, headers, config) {
                   if (status === 202) {
                     $log.log(data, status); // log job status: work in progress
-                  } else if (status === 200){
+                  } else if (status === 200) {
                     $log.log(data); // log the word count result
+                    
+                    $scope.loading = false;
+                    $scope.submitButtonText = "Submit";
                     $scope.wordcounts = data;
+
                     $timeout.cancel(timeout);
                     return false;
                   }
